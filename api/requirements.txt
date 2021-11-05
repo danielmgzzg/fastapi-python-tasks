@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]==0.15.0
+gunicorn==20.1.0
+pymongo
+python-dateutil
+python-dotenv
+schematics

@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  api:
+    ports:
+      - 8000:8000
+    networks:
+      - api-network
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017
+    volumes:
+      - ./api/tasks:/app/api/tasks
+    command: uvicorn api.tasks.main:app --reload --port 8000 --host 0.0.0.0
+
+  mongodb:
+    image: mongo:4.0
+    restart: always
+    volumes:
+      - db:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - api-network
+
+networks:
+  api-network:
+volumes:
+  db:
