@@ -2,6 +2,8 @@ version: "3.8"
 
 services:
   api:
+    build:
+      target: builder
     ports:
       - 5000:5000
     networks:
@@ -11,8 +13,7 @@ services:
       - MONGO_URI=mongodb://mongodb:27017
       - MONGO_DB=tasks-python
     volumes:
-      - ./api/tasks:/app/api/tasks
-    command: uvicorn api.tasks.main:app --reload --port 5000 --host 0.0.0.0 --log_level=info
+      - ./api:/app/api
 
   mongodb:
     image: mongo:4.0
