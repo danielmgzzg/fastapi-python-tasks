@@ -9,6 +9,6 @@ app = FastAPI()
 # Our root endpoint
 @app.get("/")
 def index():
-    return {"message": "Hello World"}
+    return {"message": "Hello Worlds"}
 
 # Signup endpoint with the POST method

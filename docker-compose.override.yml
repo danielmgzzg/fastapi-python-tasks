@@ -13,7 +13,8 @@ services:
       - MONGO_URI=mongodb://mongodb:27017
       - MONGO_DB=tasks-python
     volumes:
-      - ./api:/app/api
+      - ./api/tasks:/app/api/tasks
+    command: uvicorn api.tasks.main:app --reload --port 5000 --host 0.0.0.0 --log-level=info
 
   mongodb:
     image: mongo:4.0
