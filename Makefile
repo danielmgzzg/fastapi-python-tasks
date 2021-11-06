@@ -4,6 +4,10 @@ start:
 down:
 	docker-compose down
 
+prod:
+	@echo "\n[ Spinning up Docker Compose production environment ]"
+	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build
+
 rm-all:
 	make rmi && make rmv
 	

@@ -1,7 +1,7 @@
 from typing import Optional
 
 from fastapi import FastAPI
-from .connection import db
+from .connection import collection
 
 app = FastAPI()
 

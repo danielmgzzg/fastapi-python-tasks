@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      target: prod
+    environment:
+      - API_PORT=${API_PORT}
+      - MONGO_DB=${MONGO_DB}
+      - MONGO_URI=${MONGO_URI}
+      - CLIENT_URI=${CLIENT_URI}
+    ports:
+      - "${API_PORT}:${API_PORT}"

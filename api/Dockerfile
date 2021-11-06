@@ -15,4 +15,4 @@ WORKDIR /app
 COPY . .
 
 ENV PATH="/opt/venv/bin:$PATH"
-CMD gunicorn -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000 api.main:app
+CMD gunicorn -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:$API_PORT tasks.main:app
