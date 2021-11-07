@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     uri: str = os.environ["MONGO_URI"]
     database: str = os.environ["MONGO_DB"]
     collection: str = "tasks"
+    origins: list = [os.environ["CLIENT_URI"]]
 
 
 api_settings = Settings()

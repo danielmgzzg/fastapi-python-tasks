@@ -1,6 +1,7 @@
 from typing import Optional
 from fastapi import FastAPI, status, Request
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from .database import collection
 from .api import TasksAPI
 from .schemas import *
@@ -8,6 +9,15 @@ from .exceptions import *
 from .settings import api_settings as settings
 
 app = FastAPI(title=settings.title)
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")
@@ -48,27 +58,27 @@ def create_task(create: TaskCreate):
     return TasksAPI.create(create)
 
 
-@app.patch(
+@app.put(
     "/tasks/{id}",
     description="Update a single task by its unique ID, providing the fields to update",
-    status_code=status.HTTP_204_NO_CONTENT,
+    status_code=status.HTTP_200_OK,
     responses=get_exception_responses(TaskNotFoundException,
                                       TaskAlreadyExistsException),
     tags=["tasks"]
 )
 def update_task(id: str, update: TaskUpdate):
-    TasksAPI.update(id, update)
+    return TasksAPI.update(id, update)
 
 
 @app.delete(
     "/tasks/{id}",
     description="Delete a single task by its unique ID",
-    status_code=status.HTTP_204_NO_CONTENT,
+    status_code=status.HTTP_200_OK,
     responses=get_exception_responses(TaskNotFoundException),
     tags=["tasks"]
 )
 def delete_task(id: str):
-    TasksAPI.delete(id)
+    return TasksAPI.delete(id)
 
 
 @app.exception_handler(TaskException)

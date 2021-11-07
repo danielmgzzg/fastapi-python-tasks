@@ -2,6 +2,7 @@ from .schemas import *
 from .exceptions import *
 from .database import collection
 from .utils import get_time, get_uuid
+from fastapi.responses import JSONResponse
 
 
 class TasksAPI:
@@ -25,7 +26,8 @@ class TasksAPI:
         document = create.dict()
         document["created"] = document["updated"] = get_time()
         document["_id"] = get_uuid()
-        document["deadline"] = document.pop("deadline").isoformat()
+        if "deadline" in document:
+            document["deadline"] = document.pop("deadline").isoformat()
 
         result = collection.insert_one(document)
         assert result.acknowledged
@@ -38,12 +40,14 @@ class TasksAPI:
         document = update.dict()
         document["updated"] = get_time()
         if "deadline" in document:
-            print(document["deadline"])
             document["deadline"] = document.pop("deadline").isoformat()
 
         result = collection.update_one({"_id": task_id}, {"$set": document})
+        assert result.acknowledged
         if not result.modified_count:
             raise TaskNotFoundException(task_id)
+
+        return TasksAPI.get(task_id)
 
     @staticmethod
     def delete(task_id: str):
@@ -51,3 +55,7 @@ class TasksAPI:
         result = collection.delete_one({"_id": task_id})
         if not result.deleted_count:
             raise TaskNotFoundException(task_id)
+        return JSONResponse(
+            status_code=200,
+            content={"_id": task_id}
+        )
