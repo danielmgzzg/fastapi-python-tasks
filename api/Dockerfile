@@ -11,7 +11,7 @@ RUN pip install -r requirements.txt
 WORKDIR /app
 COPY . .
 
-FROM builder AS prod
-
+FROM builder as prod
+EXPOSE $API_PORT
 ENV PATH="/opt/venv/bin:$PATH"
-CMD gunicorn -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:$API_PORT tasks.main:app
+CMD gunicorn -w 4 -k uvicorn.workers.UvicornWorker -b :$API_PORT tasks.main:app
