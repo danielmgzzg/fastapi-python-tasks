@@ -2,6 +2,9 @@
 
 [Link to demo](https://tasks-api-python.azurewebsites.net/docs/)
 
+![image](https://user-images.githubusercontent.com/34385962/140744095-e8feb473-7e98-4963-a9f3-491a435e883a.png)
+
+
 API using FastAPI, Pydantic models, and MongoDB
 
 OpenAPI documentation models for requests, responses and errors.
@@ -10,13 +13,13 @@ OpenAPI documentation models for requests, responses and errors.
 
 - Python >= 3.7
 - Docker
-- Requirements listed on [requirements.txt](requirements.txt)
+- Requirements listed on **requirements.txt**
 - MongoDB connection string
 - Make (You can use a Mac, Linux or WSL in Windows) for build and deploy
 
 ## **Running development server**
 
-this will run nodemon with hot reloading, don't worry the mounted volumes with compose are only in development!
+this will run with reloading in uvicorn, don't worry the mounted volumes with compose are only in development!
 
 `make start`
 
