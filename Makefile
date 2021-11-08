@@ -22,7 +22,7 @@ rmv:
 
 run:
 	@echo "\n[ Running prod image ]"
-	docker run -p 8000:8000 --env-file ./.env ${REGISTRY_NAME}.azurecr.io/tasks-api-py:prod
+	docker run -p 8000:8000 --env-file ./.env ${REGISTRY_NAME}.azurecr.io/${REGISTRY_IMAGE}:${REGISTRY_TAG}
 
 az-group-create:
 	@echo "\n[ Creating Azure Resource Group ]"
