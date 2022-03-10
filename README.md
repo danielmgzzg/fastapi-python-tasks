@@ -1,7 +1,5 @@
 # FastAPI Uvicorn Tasks API
 
-[Link to demo](https://tasks-api-python.azurewebsites.net/docs/)
-
 ![image](https://user-images.githubusercontent.com/34385962/140744095-e8feb473-7e98-4963-a9f3-491a435e883a.png)
 
 
